@@ -2,10 +2,18 @@ class RestaurantsController < ApplicationController
 
   def index
     @restaurants = Restaurant.all
+    @title = if @restaurants.count == 0
+      "Aucun restaurant"
+    elsif @restaurants.count == 1
+      "1 restaurant"
+    else
+      "#{@restaurants.count} restaurants"
+    end
   end
 
   def show
     @restaurant = Restaurant.find(params[:id])
+    @reviews = @restaurant.reviews
   end
 
   def new
@@ -13,14 +21,17 @@ class RestaurantsController < ApplicationController
   end
 
   def create
-    @restaurant = Restaurant.create!(restaurant_params)
-
-    redirect_to restaurant_path(@restaurant)
+    @restaurant = Restaurant.new(restaurant_params)
+    if @restaurant.save
+      redirect_to restaurant_path(@restaurant)
+    else
+      render :new
+    end
   end
 
   private 
 
   def restaurant_params
-    params.require(:restaurant).permit(:name, :address, :category, :phone_number, :rating)
+    params.require(:restaurant).permit(:name, :address, :category, :phone_number)
   end
 end

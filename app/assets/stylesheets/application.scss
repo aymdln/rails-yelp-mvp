@@ -11,3 +11,11 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+
+p {
+    margin-bottom: 5px;
+}
+
+.card {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3)
+}

@@ -1,2 +1,40 @@
-<h1>Restaurants#show</h1>
-<p>Find me in app/views/restaurants/show.html.erb</p>
+<%= render './navbar' %>
+<div class=" container m-3">
+    <h1><%= @restaurant.name %></h1>
+    <h4><%= @restaurant.address %></h4>
+    <p><%= @restaurant.category %> restaurant</p>
+    <%= link_to 'New review', new_restaurant_review_path(@restaurant), class: "btn btn-primary my-3" %>
+    <% @reviews.each do |r| %>
+      <div class="card p-2 my-3">
+        <p><em><%= r.content %></em><br>
+        <% r.rating.times do %>
+          <span class="fas fa-star"></span>
+        <% end %>
+        <% (5 - r.rating).times do %>
+          <span class="far fa-star"></span>
+        <% end %>
+        </p>
+      </div>
+    <% end %>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   

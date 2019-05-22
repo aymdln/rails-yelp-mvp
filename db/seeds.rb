@@ -10,11 +10,20 @@ puts 'Cleaning database...'
 Restaurant.destroy_all
 
 puts 'Creating restaurants...'
-100.times do 
+10.times do 
     Restaurant.create!(
         name: Faker::Restaurant.name ,
         address:Faker::Address.full_address,
         category: Restaurant::CATEGORY.sample,
         phone_number: Faker::PhoneNumber.phone_number
+    )
+end
+
+puts 'Creating reviews ...'
+400.times do
+    Review.create!(
+        content: Faker::Lorem.sentence,
+        rating: rand(0..5),
+        restaurant_id: rand(1...Restaurant.count)
     )
 end
